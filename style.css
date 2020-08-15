@@ -129,11 +129,11 @@ input[type="submit"] {
   border-radius: 5px;
 }
 
-.notes > div > .iconButton {
+#noteTitleInput,div.footer {
   display: none;
 }
 
-#noteTitleInput,div.footer {
+.cardButtonContainer {
   display: none;
 }
 

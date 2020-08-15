@@ -33,6 +33,9 @@ paletteIconButton.addEventListener('click',(e) => {
 var notesContainer = document.getElementsByClassName("notes")[0]
 function addNote(title, body, backColor, noteId) {
     var noteCard = document.createElement('div')
+    var buttonDiv = document.createElement('div')
+    buttonDiv.className = 'cardButtonContainer'
+
 
     var titleNode = document.createElement('h4')
     var titleNodeText = document.createTextNode(title)
@@ -49,6 +52,14 @@ function addNote(title, body, backColor, noteId) {
     var archieveText = document.createTextNode('archive')
     archieveIcon.appendChild(archieveText)
     archeiveIconButton.appendChild(archieveIcon)
+
+    var binIconButton = document.createElement('button')
+    binIconButton.className = 'iconButton'
+    var binIcon = document.createElement('i')
+    binIcon.className = 'material-icons'
+    var binText = document.createTextNode('delete')
+    binIcon.appendChild(binText)
+    binIconButton.appendChild(binIcon)
 
     archeiveIconButton.addEventListener('click',(e) => {
         e.preventDefault()
@@ -73,19 +84,48 @@ function addNote(title, body, backColor, noteId) {
         .catch((err) => console.log("posting is not successful"))
     })
 
-    noteCard.addEventListener('mouseover',(e) => {
-        archeiveIconButton.style.display = 'block'
+    binIconButton.addEventListener('click',(e) => {
+        e.preventDefault()
+        fetch(`http://localhost:3000/notes/${noteId}`, {
+        method : 'DELETE'})
+        .then((res) => console.log("success"))
+        .catch((err) => console.log("failed"))
+
+        fetch('http://localhost:3000/bin/', {
+            method : 'POST',
+            headers : {
+                'content-type' : 'application/json'
+            },
+            body : JSON.stringify({
+                title : title,
+                text : body,
+                color : backColor
+            })
+        })
+        .then((res) => console.log("posted to bin successfuly"))
+        .catch((err) => console.log("posting is not successful"))
     })
 
-    noteCard.addEventListener('mouseleave',(e) => {
-        archeiveIconButton.style.display = 'none'
+    noteCard.addEventListener('mouseover',(e) => {
+        e.preventDefault()
+        buttonDiv.style.display = 'flex'
     })
+    
+    noteCard.addEventListener('mouseleave',(e) => {
+        e.preventDefault()
+        buttonDiv.style.display = 'none'
+    })
+
     noteCard.append(titleNode)
     noteCard.appendChild(bodyNode)
-    noteCard.appendChild(archeiveIconButton)
+    buttonDiv.appendChild(archeiveIconButton)
+    buttonDiv.appendChild(binIconButton)
+    noteCard.appendChild(buttonDiv)
     noteCard.style.backgroundColor = backColor
     notesContainer.insertBefore(noteCard, notesContainer.firstChild)
 }
+
+
 
 var noteBodyInput = document.getElementById("noteBodyInput")
 var noteTitleInput = document.getElementById("noteTitleInput")
@@ -93,7 +133,7 @@ function submitForm(e) {
     e.preventDefault()
     if(noteTitleInput.value !== "" || noteBodyInput.value !== "") {
         addNote(noteTitleInput.value,noteBodyInput.value,noteBackgroundColor)
-        postNotes(noteTitleInput.value,noteBodyInput.value,noteBackgroundColor) //come back here ***********************************
+        postNotes(noteTitleInput.value,noteBodyInput.value,noteBackgroundColor)
         noteTitleInput.value = ""
         noteBodyInput.value = ""
         noteBackgroundColor = null
