@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://unpkg.com/vanilla-picker@2"></script>
+    <title>Note Keeper</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <a class="sidebarItem active" href="#notes">Notes</a>
+      <a class="sidebarItem" href="#archive">Archive</a>
+      <a class="sidebarItem" href="#bin">Bin</a>
+    </div>
+
+    <div class="content">
+      <button class = "openbtn" onclick="openSidebar()">☰</button>
+      <form onsubmit="submitForm(event)" class="noteForm">
+        <input
+        type="text"
+        id="noteTitleInput"
+        placeholder="Title"
+        autocomplete="off"
+      />
+        <input
+          type="text"
+          id="noteBodyInput"
+          placeholder="Take a note..."
+          autocomplete="off"
+        />
+        <div class="footer">
+          <div class="iconButtonContainer">
+            <button class="iconButton"><i class="material-icons">push_pin</i></button>
+            <button class="iconButton"><i class="material-icons">palette</i></button>
+          </div>
+          <input 
+            type="submit"
+            value="Confirm"/>
+        </div>
+      </form>
+      <div class="notes"></div>
+    </div>
+    <script src="./script.js"></script>
+    <script src="./ui.js"></script>
+  </body>
+</html>
