@@ -1,8 +1,37 @@
 {
-  "notes": [],
-  "archive": [],
-  "bin": [],
-  "pinned": [
+  "notes": [
+    {
+      "title": "ahmad",
+      "text": "reza",
+      "color": "#33b020ff",
+      "id": 2
+    },
+    {
+      "title": "ahmad",
+      "text": "reza",
+      "color": "#33b020ff",
+      "id": 3
+    },
+    {
+      "title": "title4",
+      "text": "work4",
+      "color": null,
+      "id": 4
+    },
+    {
+      "title": "title3",
+      "text": "work3",
+      "color": null,
+      "id": 5
+    },
+    {
+      "title": "new",
+      "text": "sample2",
+      "color": null,
+      "id": 6
+    }
+  ],
+  "archive": [
     {
       "title": "title2",
       "text": "sample2",
@@ -10,11 +39,51 @@
       "id": 1
     },
     {
-      "title": "title3",
-      "text": "work3",
+      "title": "title2",
+      "text": "sample2",
       "color": null,
       "id": 2
     },
+    {
+      "title": "title4",
+      "text": "work4",
+      "color": null,
+      "id": 3
+    },
+    {
+      "title": "title4",
+      "text": "work4",
+      "color": null,
+      "id": 4
+    }
+  ],
+  "bin": [
+    {
+      "title": "title4",
+      "text": "work4",
+      "color": null,
+      "id": 1
+    },
+    {
+      "title": "title2",
+      "text": "sample2",
+      "color": null,
+      "id": 2
+    },
+    {
+      "title": "title4",
+      "text": "work4",
+      "color": null,
+      "id": 3
+    },
+    {
+      "title": "title4",
+      "text": "work4",
+      "color": null,
+      "id": 4
+    }
+  ],
+  "pinned": [
     {
       "title": "title2",
       "text": "sample2",
@@ -28,46 +97,16 @@
       "id": 4
     },
     {
-      "title": "title4",
-      "text": "work4",
-      "color": null,
-      "id": 5
-    },
-    {
-      "title": "title4",
-      "text": "work4",
-      "color": null,
-      "id": 6
-    },
-    {
-      "title": "title4",
-      "text": "work4",
-      "color": null,
-      "id": 7
-    },
-    {
-      "title": "title4",
-      "text": "work4",
-      "color": null,
-      "id": 8
-    },
-    {
-      "title": "title4",
-      "text": "work4",
-      "color": null,
-      "id": 9
-    },
-    {
-      "title": "title4",
-      "text": "work4",
-      "color": null,
-      "id": 10
-    },
-    {
       "title": "ahmad",
       "text": "reza",
       "color": "#33b020ff",
-      "id": 11
+      "id": 5
+    },
+    {
+      "title": "new",
+      "text": "samle",
+      "color": null,
+      "id": 6
     }
   ]
 }

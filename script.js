@@ -30,8 +30,8 @@ paletteIconButton.addEventListener('click',(e) => {
     }
 })
 
-var notesContainer = document.getElementsByClassName("notes")[1]
-var pinnedNotesContainer = document.getElementsByClassName("notes")[0]
+var notesContainer = document.getElementsByClassName("notes")[0]
+var pinnedNotesContainer = document.getElementsByClassName("pinnedNotes")[0]
 var isSubmitPinned = false
 
 function addNote(title, body, backColor, noteId, isPinned) {
@@ -105,50 +105,98 @@ function addNote(title, body, backColor, noteId, isPinned) {
 
 function handleCardArchiveButton(title, body, backColor, noteId, archeiveIconButton) {
     archeiveIconButton.addEventListener('click',(e) => {
+        let parentCard = archeiveIconButton.parentNode.parentNode.parentNode.className
         e.preventDefault()
-        fetch(`http://localhost:3000/notes/${noteId}`, {
+        if(parentCard === "notes") {
+            fetch(`http://localhost:3000/notes/${noteId}`, {
             method : 'DELETE'
-        })
-        .then((res) => console.log("deleted from main notes successfuly."))
-        .catch((err) => console.log("faild deleting note from main notes."))
-
-        fetch('http://localhost:3000/archive', {
-            method : 'POST',
-            headers : {
-                'content-type' : 'application/json'
-            },
-            body : JSON.stringify ({
-                title : title,
-                text : body,
-                color : backColor
             })
-        })
-        .then((res) => console.log("posted to archive successfuly"))
-        .catch((err) => console.log("posting is not successful"))
+            .then((res) => console.log("deleted from main notes successfuly."))
+            .catch((err) => console.log("faild deleting note from main notes."))
+
+            fetch('http://localhost:3000/archive', {
+                method : 'POST',
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify ({
+                    title : title,
+                    text : body,
+                    color : backColor
+                })
+            })
+            .then((res) => console.log("posted to archive successfuly"))
+            .catch((err) => console.log("posting is not successful"))
+        } else {
+            fetch(`http://localhost:3000/pinned/${noteId}`, {
+            method : 'DELETE'
+            })
+            .then((res) => console.log("deleted from main notes successfuly."))
+            .catch((err) => console.log("faild deleting note from main notes."))
+
+            fetch('http://localhost:3000/archive', {
+                method : 'POST',
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify ({
+                    title : title,
+                    text : body,
+                    color : backColor
+                })
+            })
+            .then((res) => console.log("posted to archive successfuly"))
+            .catch((err) => console.log("posting is not successful"))
+        }
+        
     })
 }
 
 function handleCardBinButton(title, body, backColor, noteId, binIconButton) {
     binIconButton.addEventListener('click',(e) => {
+        let parentCard = binIconButton.parentNode.parentNode.parentNode.className
         e.preventDefault()
-        fetch(`http://localhost:3000/notes/${noteId}`, {
-        method : 'DELETE'})
-        .then((res) => console.log("success"))
-        .catch((err) => console.log("failed"))
+        if(parentCard === "notes") {
+            fetch(`http://localhost:3000/notes/${noteId}`, {
+            method : 'DELETE'})
+            .then((res) => console.log("success"))
+            .catch((err) => console.log("failed"))
 
-        fetch('http://localhost:3000/bin/', {
-            method : 'POST',
-            headers : {
-                'content-type' : 'application/json'
-            },
-            body : JSON.stringify({
-                title : title,
-                text : body,
-                color : backColor
+            fetch('http://localhost:3000/bin/', {
+                method : 'POST',
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    title : title,
+                    text : body,
+                    color : backColor
+                })
             })
-        })
-        .then((res) => console.log("posted to bin successfuly"))
-        .catch((err) => console.log("posting is not successful"))
+            .then((res) => console.log("posted to bin successfuly"))
+            .catch((err) => console.log("posting is not successful"))
+        } else {
+            fetch(`http://localhost:3000/pinned/${noteId}`, {
+            method : 'DELETE'})
+            .then((res) => console.log("success"))
+            .catch((err) => console.log("failed"))
+
+            fetch('http://localhost:3000/bin/', {
+                method : 'POST',
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    title : title,
+                    text : body,
+                    color : backColor
+                })
+            })
+            .then((res) => console.log("posted to bin successfuly"))
+            .catch((err) => console.log("posting is not successful"))
+        }
+        
+        
     })
 
 }
@@ -156,27 +204,50 @@ function handleCardBinButton(title, body, backColor, noteId, binIconButton) {
 function handleCardPinButton(title, body, backColor, noteId, pinIconButton) {
     
     pinIconButton.addEventListener('click',(e) => {
-        let parentCard = pinIconButton.parentNode /////not sure....
+        let parentCard = pinIconButton.parentNode.parentNode.parentNode.className
         console.log(parentCard)
         e.preventDefault()
-        fetch(`http://localhost:3000/notes/${noteId}`, {
-        method : 'DELETE'})
-        .then((res) => console.log("success"))
-        .catch((err) => console.log("failed"))
+        
+        if(parentCard === "notes") {
+            fetch(`http://localhost:3000/notes/${noteId}`, {
+            method : 'DELETE'})
+            .then((res) => console.log("success"))
+            .catch((err) => console.log("failed"))
 
-        fetch('http://localhost:3000/pinned/', {
-            method : 'POST',
-            headers : {
-                'content-type' : 'application/json'
-            },
-            body : JSON.stringify({
-                title : title,
-                text : body,
-                color : backColor
+            fetch('http://localhost:3000/pinned/', {
+                method : 'POST',
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    title : title,
+                    text : body,
+                    color : backColor
+                })
             })
-        })
-        .then((res) => console.log("posted to bin successfuly"))
-        .catch((err) => console.log("posting is not successful"))
+            .then((res) => console.log("posted to bin successfuly"))
+            .catch((err) => console.log("posting is not successful"))
+        } else {
+            fetch(`http://localhost:3000/pinned/${noteId}`, {
+            method : 'DELETE'})
+            .then((res) => console.log("success"))
+            .catch((err) => console.log("failed"))
+
+            fetch('http://localhost:3000/notes/', {
+                method : 'POST',
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    title : title,
+                    text : body,
+                    color : backColor
+                })
+            })
+            .then((res) => console.log("posted to bin successfuly"))
+            .catch((err) => console.log("posting is not successful"))
+        }
+        
     })
 }
 
