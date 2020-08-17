@@ -103,6 +103,13 @@ input[type="submit"] {
   padding: 10px;
 }
 
+.archivedNotes {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
 .footer {
   display: flex;
   flex-direction: row;
@@ -137,6 +144,19 @@ input[type="submit"] {
 }
 
 .pinnedNotes > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #07423f;
+  border: 2px solid white;
+  min-height: 120px;
+  color: white;
+  height: 100px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.archivedNotes > div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

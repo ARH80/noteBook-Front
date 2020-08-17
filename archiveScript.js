@@ -1,18 +1,16 @@
-var paletteIconButton = document.getElementsByClassName("iconButton")[1]
-var noteBackgroundColor = null
-paletteIconButton.addEventListener('click',(e) => {
-    e.preventDefault()
-    var picker = new Picker(paletteIconButton)
-    picker.onDone = function(color) {
-        noteBackgroundColor = color.hex
-    }
-})
+function getArchivedNotes() {
+    fetch('http://localhost:3000/archive')
+    .then((response) => response.json())
+    .then(function(datas) {
+        for(data of datas) {
+            addNote(data.title, data.text, data.color, data.id)
+        }
+    })
+}
 
-var notesContainer = document.getElementsByClassName("notes")[0]
-var pinnedNotesContainer = document.getElementsByClassName("pinnedNotes")[0]
-var isSubmitPinned = false
+var notesContainer = document.getElementsByClassName("archivedNotes")[0]
 
-function addNote(title, body, backColor, noteId, isPinned) {
+function addNote(title, body, backColor, noteId) {
     var noteCard = document.createElement('div')
     var buttonDiv = document.createElement('div')
     buttonDiv.className = 'cardButtonContainer'
@@ -73,13 +71,12 @@ function addNote(title, body, backColor, noteId, isPinned) {
     buttonDiv.appendChild(binIconButton)
     noteCard.appendChild(buttonDiv)
     noteCard.style.backgroundColor = backColor
-    if(!isPinned) {
-        notesContainer.insertBefore(noteCard, notesContainer.firstChild)
-    } else {
-        pinnedNotesContainer.insertBefore(noteCard, pinnedNotesContainer.firstChild)
-    }
+    
+    notesContainer.insertBefore(noteCard, notesContainer.firstChild)
+    
     
 }
+
 function handleCardArchiveButton(title, body, backColor, noteId, archeiveIconButton) {
     archeiveIconButton.addEventListener('click',(e) => {
         let parentCard = archeiveIconButton.parentNode.parentNode.parentNode.className
@@ -228,82 +225,4 @@ function handleCardPinButton(title, body, backColor, noteId, pinIconButton) {
     })
 }
 
-var noteBodyInput = document.getElementById("noteBodyInput")
-var noteTitleInput = document.getElementById("noteTitleInput")
-
-var pinButtonSubmit = document.getElementsByClassName("iconButton")[0]
-pinButtonSubmit.addEventListener('click',(e) => {
-    e.preventDefault()
-    if(!isSubmitPinned) {
-        isSubmitPinned = true
-    } else {
-        isSubmitPinned = false
-    }
-})
-function submitForm(e) {
-    e.preventDefault()
-    if(noteTitleInput.value !== "" || noteBodyInput.value !== "") {
-        addNote(noteTitleInput.value,noteBodyInput.value,noteBackgroundColor,isSubmitPinned)
-        postNotes(noteTitleInput.value,noteBodyInput.value,noteBackgroundColor,isSubmitPinned)
-        noteTitleInput.value = ""
-        noteBodyInput.value = ""
-        noteBackgroundColor = null
-        isSubmitPinned = false
-    }
-}
-function getNotes(isPinned) {
-    if(!isPinned) {
-        var xhttp = new XMLHttpRequest()
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var notes = JSON.parse(xhttp.responseText)
-                for(note of notes) {
-                    addNote(note.title,note.text,note.color,note.id,false)
-                }
-            }
-        }
-        xhttp.open("GET", "http://localhost:3000/notes", true)
-        xhttp.send() 
-    } else {
-        var xhttp = new XMLHttpRequest()
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var notes = JSON.parse(xhttp.responseText)
-                for(note of notes) {
-                    addNote(note.title,note.text,note.color,note.id,true)
-                }
-            }
-        }
-        xhttp.open("GET", "http://localhost:3000/pinned", true)
-        xhttp.send()
-    }
-    
-}
-
-getNotes(true)
-getNotes(false)
-
-function postNotes(noteTitle, noteBody, noteBackColor, isSubmitPinned) {
-    if(!isSubmitPinned) {
-        var xhttp = new XMLHttpRequest()
-        xhttp.open("POST", "http://localhost:3000/notes", true)
-        xhttp.setRequestHeader("Content-Type","application/json;charset=UTF-8")
-        var data = {
-            title : noteTitle,
-            text : noteBody,
-            color : noteBackColor
-        }
-        xhttp.send(JSON.stringify(data))
-    } else {
-        var xhttp = new XMLHttpRequest()
-        xhttp.open("POST", "http://localhost:3000/pinned", true)
-        xhttp.setRequestHeader("Content-Type","application/json;charset=UTF-8")
-        var data = {
-            title : noteTitle,
-            text : noteBody,
-            color : noteBackColor
-        }
-        xhttp.send(JSON.stringify(data))
-    }
-    
-}
+getArchivedNotes()
