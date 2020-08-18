@@ -1,5 +1,5 @@
-function getArchivedNotes() {
-    fetch('http://localhost:3000/archive')
+function getbinNotes() {
+    fetch('http://localhost:3000/bin')
     .then((response) => response.json())
     .then(function(datas) {
         for(data of datas) {
@@ -31,7 +31,7 @@ function addNote(title, body, backColor, noteId) {
     archeiveIconButton.className = 'iconButton'
     var archieveIcon = document.createElement('i')
     archieveIcon.className = 'material-icons'
-    var archieveText = document.createTextNode('unarchive')
+    var archieveText = document.createTextNode('archive')
     archieveIcon.appendChild(archieveText)
     archeiveIconButton.appendChild(archieveIcon)
 
@@ -45,7 +45,7 @@ function addNote(title, body, backColor, noteId) {
     binIconButton.className = 'iconButton'
     var binIcon = document.createElement('i')
     binIcon.className = 'material-icons'
-    var binText = document.createTextNode('delete')
+    var binText = document.createTextNode('restore_from_trash')
     binIcon.appendChild(binText)
     binIconButton.appendChild(binIcon)
 
@@ -80,13 +80,13 @@ function addNote(title, body, backColor, noteId) {
 function handleCardArchiveButton(title, body, backColor, noteId, archeiveIconButton) {
     archeiveIconButton.addEventListener('click',(e) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/archive/${noteId}`, {
+        fetch(`http://localhost:3000/bin/${noteId}`, {
         method : 'DELETE'
         })
         .then((res) => console.log("deleted from main notes successfuly."))
         .catch((err) => console.log("faild deleting note from main notes."))
 
-        fetch('http://localhost:3000/notes', {
+        fetch('http://localhost:3000/archive', {
             method : 'POST',
             headers : {
                 'content-type' : 'application/json'
@@ -105,12 +105,12 @@ function handleCardArchiveButton(title, body, backColor, noteId, archeiveIconBut
 function handleCardBinButton(title, body, backColor, noteId, binIconButton) {
     binIconButton.addEventListener('click',(e) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/archive/${noteId}`, {
+        fetch(`http://localhost:3000/bin/${noteId}`, {
         method : 'DELETE'})
         .then((res) => console.log("success"))
         .catch((err) => console.log("failed"))
 
-        fetch('http://localhost:3000/bin/', {
+        fetch('http://localhost:3000/notes/', {
             method : 'POST',
             headers : {
                 'content-type' : 'application/json'
@@ -131,7 +131,7 @@ function handleCardPinButton(title, body, backColor, noteId, pinIconButton) {
     pinIconButton.addEventListener('click',(e) => {
         e.preventDefault()
         
-        fetch(`http://localhost:3000/archive/${noteId}`, {
+        fetch(`http://localhost:3000/bin/${noteId}`, {
         method : 'DELETE'})
         .then((res) => console.log("success"))
         .catch((err) => console.log("failed"))
@@ -152,4 +152,4 @@ function handleCardPinButton(title, body, backColor, noteId, pinIconButton) {
     })
 }
 
-getArchivedNotes()
+getbinNotes()

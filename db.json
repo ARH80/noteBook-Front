@@ -1,34 +1,16 @@
 {
   "notes": [
     {
-      "title": "ahmad",
-      "text": "reza",
-      "color": "#33b020ff",
-      "id": 2
-    },
-    {
-      "title": "ahmad",
-      "text": "reza",
-      "color": "#33b020ff",
-      "id": 3
-    },
-    {
-      "title": "title4",
-      "text": "work4",
-      "color": null,
-      "id": 4
-    },
-    {
-      "title": "title3",
-      "text": "work3",
-      "color": null,
-      "id": 5
-    },
-    {
-      "title": "new",
+      "title": "title2",
       "text": "sample2",
       "color": null,
-      "id": 6
+      "id": 7
+    },
+    {
+      "title": "title2",
+      "text": "sample2",
+      "color": null,
+      "id": 8
     }
   ],
   "archive": [
@@ -55,12 +37,24 @@
       "text": "work4",
       "color": null,
       "id": 4
+    },
+    {
+      "title": "new",
+      "text": "sample2",
+      "color": null,
+      "id": 6
+    },
+    {
+      "title": "title4",
+      "text": "work4",
+      "color": null,
+      "id": 7
     }
   ],
   "bin": [
     {
-      "title": "title4",
-      "text": "work4",
+      "title": "title3",
+      "text": "work3",
       "color": null,
       "id": 1
     },
@@ -71,9 +65,9 @@
       "id": 2
     },
     {
-      "title": "title4",
-      "text": "work4",
-      "color": null,
+      "title": "ahmad",
+      "text": "reza",
+      "color": "#33b020ff",
       "id": 3
     },
     {
@@ -85,28 +79,16 @@
   ],
   "pinned": [
     {
-      "title": "title2",
-      "text": "sample2",
+      "title": "title4",
+      "text": "work4",
       "color": null,
-      "id": 3
+      "id": 6
     },
     {
       "title": "title4",
       "text": "work4",
       "color": null,
-      "id": 4
-    },
-    {
-      "title": "ahmad",
-      "text": "reza",
-      "color": "#33b020ff",
-      "id": 5
-    },
-    {
-      "title": "new",
-      "text": "samle",
-      "color": null,
-      "id": 6
+      "id": 8
     }
   ]
 }
